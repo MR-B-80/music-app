@@ -1,3 +1,7 @@
+.new-style {
+  border-radius: 30px !important;
+  padding: 10px !important;
+}
 .nowplaying {
   bottom: 0;
   z-index: 3;

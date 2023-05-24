@@ -1,5 +1,5 @@
-import Input from '../../components/input';
-import './styles.css';
+import Input from "../../components/input";
+import "./styles.css";
 
 type HomeProps = {
   onSearch?: Function;

@@ -1,6 +1,6 @@
-import { useLayoutEffect, useRef, useState } from 'react';
-import { getTime } from '../../utils';
-import './styles.css';
+import { useLayoutEffect, useRef, useState } from "react";
+import { getTime } from "../../utils";
+import "./styles.css";
 
 type SliderProps = {
   audio?: any;
@@ -24,9 +24,9 @@ const Slider = ({
   onTouchEnd,
 }: SliderProps) => {
   const isTouchDevice =
-    'ontouchstart' in window ||
+    "ontouchstart" in window ||
     navigator.maxTouchPoints > 0 ||
-    navigator.msMaxTouchPoints > 0;
+    navigator.maxTouchPoints > 0;
 
   const dialRef = useRef(null);
   const rangeRef = useRef(null);
@@ -38,22 +38,22 @@ const Slider = ({
     const pos = { x: 0, y: 0 };
 
     if (
-      e.type === 'touchstart' ||
-      e.type === 'touchmove' ||
-      e.type === 'touchend' ||
-      e.type === 'touchcancel'
+      e.type === "touchstart" ||
+      e.type === "touchmove" ||
+      e.type === "touchend" ||
+      e.type === "touchcancel"
     ) {
       const touch = (e as any).changedTouches[0];
       pos.x = touch.pageX;
       pos.y = touch.pageY;
     } else if (
-      e.type === 'mousedown' ||
-      e.type === 'mouseup' ||
-      e.type === 'mousemove' ||
-      e.type === 'mouseover' ||
-      e.type === 'mouseout' ||
-      e.type === 'mouseenter' ||
-      e.type === 'mouseleave'
+      e.type === "mousedown" ||
+      e.type === "mouseup" ||
+      e.type === "mousemove" ||
+      e.type === "mouseover" ||
+      e.type === "mouseout" ||
+      e.type === "mouseenter" ||
+      e.type === "mouseleave"
     ) {
       pos.x = e.pageX;
       pos.y = e.pageY;
@@ -140,13 +140,13 @@ const Slider = ({
     <div
       ref={rangeRef}
       className="slider"
-      onMouseUp={e => !isTouchDevice && onSliderStop(e)}
-      onTouchEnd={e => isTouchDevice && onSliderStop(e)}
-      onMouseMove={e => !isTouchDevice && onSliderMove(e)}
-      onTouchMove={e => isTouchDevice && onSliderMove(e)}
-      onMouseDown={e => !isTouchDevice && onSliderInit(e)}
-      onTouchStart={e => isTouchDevice && onSliderInit(e)}
-      style={{ '--size': `${size}px`, '--dial-size': `${size / 10}px` } as any}
+      onMouseUp={(e) => !isTouchDevice && onSliderStop(e)}
+      onTouchEnd={(e) => isTouchDevice && onSliderStop(e)}
+      onMouseMove={(e) => !isTouchDevice && onSliderMove(e)}
+      onTouchMove={(e) => isTouchDevice && onSliderMove(e)}
+      onMouseDown={(e) => !isTouchDevice && onSliderInit(e)}
+      onTouchStart={(e) => isTouchDevice && onSliderInit(e)}
+      style={{ "--size": `${size}px`, "--dial-size": `${size / 10}px` } as any}
     >
       <input type="range" min="0" max="100" className="slider__range"></input>
       <div className="slider__track">
@@ -157,10 +157,10 @@ const Slider = ({
       <div className="slider__start"></div>
       <div className="slider__end"></div>
       <div className="slider__currtime">
-        {audio && audio.currentTime ? getTime(audio.currentTime) : ''}
+        {audio && audio.currentTime ? getTime(audio.currentTime) : ""}
       </div>
       <div className="slider__totaltime">
-        {audio && audio.duration ? getTime(audio.duration) : ''}
+        {audio && audio.duration ? getTime(audio.duration) : ""}
       </div>
     </div>
   );

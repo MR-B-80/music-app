@@ -1,9 +1,9 @@
-import { useCallback, useEffect, useRef, useState, useMemo } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { FaChevronLeft } from 'react-icons/fa';
+import { useCallback, useEffect, useRef, useState, useMemo } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { FaChevronLeft } from "react-icons/fa";
 
-import { Header, Empty } from '../components';
-import { useResize } from '../hooks';
+import { Header, Empty } from "../components";
+import { useResize } from "../hooks";
 
 import {
   ADD_SONGS,
@@ -12,12 +12,12 @@ import {
   RESUME_SONG,
   DELETE_SONG,
   SET_VIEW,
-} from '../redux';
+} from "../redux";
 
-import AudioSession from '../services/audio-session';
-import { Track, Menu, Home, NowPlaying, Playlist } from '../views';
-import { setTheme } from '../utils';
-import './styles.css';
+import AudioSession from "../services/audio-session";
+import { Track, Menu, Home, NowPlaying, Playlist } from "../views";
+import { setTheme } from "../utils";
+import "./styles.css";
 
 function App() {
   const prevPlayState = useRef({ playing: false, index: -1 });
@@ -34,8 +34,10 @@ function App() {
   const playState = useSelector((state: any) => state.playState);
 
   const [range, setRange] = useState(0);
+  const [minutes, setMinutes] = useState(0);
+  const [seconds, setSeconds] = useState(0);
   const [showMenu, setShowMenu] = useState(false);
-  const [searchText, setSearchText] = useState('');
+  const [searchText, setSearchText] = useState("");
 
   useMemo(() => setTheme(settings.light), [settings.light]);
 
@@ -44,7 +46,7 @@ function App() {
       return songs;
     } else {
       return songs.filter((s: any) =>
-        s.name.toLowerCase().includes(searchText.toLowerCase()),
+        s.name.toLowerCase().includes(searchText.toLowerCase())
       );
     }
   }, [searchText, songs]);
@@ -92,7 +94,7 @@ function App() {
 
   const stop = () => {
     const htmlAudio: HTMLAudioElement = audioPlayer();
-    htmlAudio.src = '';
+    htmlAudio.src = "";
   };
 
   const shuffleSong = () => {
@@ -114,9 +116,9 @@ function App() {
           return;
         }
 
-        if (settings.repeat === 'one') {
+        if (settings.repeat === "one") {
           resumeSong();
-        } else if (settings.repeat === 'all') {
+        } else if (settings.repeat === "all") {
           goNext();
         } else {
           if (playState.index + 1 !== songs.length) {
@@ -132,7 +134,7 @@ function App() {
       pauseSong();
 
       setTimeout(() => {
-        if (settings.repeat === 'one' && !override) {
+        if (settings.repeat === "one" && !override) {
           resumeSong();
         } else {
           const prevIndex = playState.index - 1;
@@ -197,10 +199,11 @@ function App() {
   }, [playState]);
 
   const updateTime = () => {
-    const currentTime =
-      (100 * audioPlayer().currentTime) / audioPlayer().duration || 0;
-
-    setRange(Math.round(currentTime));
+    const minutes = Math.floor(audioPlayer().currentTime / 60);
+    const seconds = Math.floor(audioPlayer().currentTime - minutes * 60);
+    setMinutes(minutes);
+    setSeconds(seconds);
+    setRange(seconds);
   };
   // eslint-disable-next-line
   const timeDrag = (time: number) => {
@@ -220,7 +223,7 @@ function App() {
   return (
     <div ref={ref} className="app__wrapper">
       <div className="app__container">
-        {view === 'home' ? (
+        {view === "home" ? (
           <Header
             title="playlist"
             onRightIconClick={() => addSongs()}
@@ -231,16 +234,16 @@ function App() {
             title="Track"
             rightIcon={null}
             leftIcon={
-              <div style={{ transform: 'translateX(-2px)' }}>
+              <div style={{ transform: "translateX(-2px)" }}>
                 <FaChevronLeft size={24} />
               </div>
             }
-            onLeftIconClick={() => dispatch(SET_VIEW('home'))}
+            onLeftIconClick={() => dispatch(SET_VIEW("home"))}
           />
         )}
         <Menu show={showMenu} onClose={() => setShowMenu(false)} />
 
-        {view === 'home' && (
+        {view === "home" && (
           <Home
             showSearch={true}
             onSearch={(e: string) => setSearchText(e)}
@@ -250,8 +253,8 @@ function App() {
                   message="No songs found"
                   description={
                     searchText && songs.length > 0
-                      ? 'To widen your search, change or remove keyword'
-                      : 'When you are ready, go ahead and add few songs'
+                      ? "To widen your search, change or remove keyword"
+                      : "When you are ready, go ahead and add few songs"
                   }
                 />
               ) : (
@@ -273,7 +276,7 @@ function App() {
             }
           />
         )}
-        {view === 'track' && (
+        {view === "track" && (
           <Track
             size={size}
             range={range}
@@ -296,7 +299,7 @@ function App() {
             type="file"
             ref={input}
             accept="audio/mp3,audio/wav,audio/ogg"
-            onChange={e => dispatch(ADD_SONGS(e.target.files))}
+            onChange={(e) => dispatch(ADD_SONGS(e.target.files))}
           />
           <audio
             hidden
@@ -311,12 +314,14 @@ function App() {
           percent={range}
           width={size.width}
           audio={audioPlayer()}
+          minutes={minutes}
+          seconds={seconds}
           playing={playState.playing}
           song={songs[playState.index]}
           onPlay={() => resumeSong()}
           onPause={() => pauseSong()}
-          onClick={() => dispatch(SET_VIEW('track'))}
-          open={view === 'home' && playState.index > -1}
+          onClick={() => dispatch(SET_VIEW("track"))}
+          open={view === "home" && playState.index > -1}
         />
       </div>
     </div>

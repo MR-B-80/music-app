@@ -1,22 +1,22 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
+import React from "react";
+import ReactDOM from "react-dom";
 
-import { createStore } from 'redux';
-import { Provider } from 'react-redux';
+import { createStore } from "redux";
+import { Provider } from "react-redux";
+import "bootstrap/dist/css/bootstrap.min.css";
+import "./index.css";
+import App from "./app";
+import reportWebVitals from "./reportWebVitals";
+import * as serviceWorkerRegistration from "./serviceWorkerRegistration";
 
-import './index.css';
-import App from './app';
-import reportWebVitals from './reportWebVitals';
-import * as serviceWorkerRegistration from './serviceWorkerRegistration';
-
-import { reducers } from './redux';
-import DataStore from './services/data-store';
+import { reducers } from "./redux";
+import DataStore from "./services/data-store";
 
 const WINDOW = window as any;
 
 (async () => {
   try {
-    let localStore: any = await DataStore.get('state');
+    let localStore: any = await DataStore.get("state");
 
     if (localStore === null) {
       localStore = undefined;
@@ -26,11 +26,11 @@ const WINDOW = window as any;
       reducers,
       localStore,
       WINDOW.__REDUX_DEVTOOLS_EXTENSION__ &&
-        WINDOW.__REDUX_DEVTOOLS_EXTENSION__(),
+        WINDOW.__REDUX_DEVTOOLS_EXTENSION__()
     );
 
     store.subscribe(() => {
-      DataStore.set('state', {
+      DataStore.set("state", {
         songs: store.getState().songs,
         settings: store.getState().settings,
       });
@@ -42,7 +42,7 @@ const WINDOW = window as any;
           <App />
         </Provider>
       </React.StrictMode>,
-      document.getElementById('root'),
+      document.getElementById("root")
     );
   } catch (error) {}
 })();

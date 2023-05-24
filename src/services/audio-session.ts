@@ -1,4 +1,4 @@
-import img from '../assets/logo512.png';
+import img from "../assets/logo512.png";
 
 declare global {
   interface Window {
@@ -9,7 +9,7 @@ declare global {
 
 const Navigator = window.navigator as any;
 
-const isMediaSessionSupported = 'mediaSession' in navigator;
+const isMediaSessionSupported = "mediaSession" in navigator;
 
 export default class AudioSession {
   public static addNewSong = async (song: any, callbacks: any) => {
@@ -25,55 +25,55 @@ export default class AudioSession {
 
         Navigator.mediaSession.metadata = new window.MediaMetadata({
           title: title ?? song.name,
-          artist: artist ?? 'Unknown',
-          album: album ?? 'Unknown',
+          artist: artist ?? "Unknown",
+          album: album ?? "Unknown",
           year: year,
           artwork: [
             {
               src: picture,
-              sizes: '96x96',
-              type: 'image/png',
+              sizes: "96x96",
+              type: "image/png",
             },
             {
               src: picture,
-              sizes: '128x128',
-              type: 'image/png',
+              sizes: "128x128",
+              type: "image/png",
             },
             {
               src: picture,
-              sizes: '192x192',
-              type: 'image/png',
+              sizes: "192x192",
+              type: "image/png",
             },
             {
               src: picture,
-              sizes: '256x256',
-              type: 'image/png',
+              sizes: "256x256",
+              type: "image/png",
             },
             {
               src: picture,
-              sizes: '384x384',
-              type: 'image/png',
+              sizes: "384x384",
+              type: "image/png",
             },
             {
               src: picture,
-              sizes: '512x512',
-              type: 'image/png',
+              sizes: "512x512",
+              type: "image/png",
             },
           ],
         });
 
-        Navigator.mediaSession.setActionHandler('previoustrack', prev);
+        Navigator.mediaSession.setActionHandler("previoustrack", prev);
 
-        Navigator.mediaSession.setActionHandler('nexttrack', next);
+        Navigator.mediaSession.setActionHandler("nexttrack", next);
 
-        Navigator.mediaSession.setActionHandler('play', play);
+        Navigator.mediaSession.setActionHandler("play", play);
 
-        Navigator.mediaSession.setActionHandler('pause', pause);
+        Navigator.mediaSession.setActionHandler("pause", pause);
 
-        Navigator.mediaSession.setActionHandler('stop', pause);
+        Navigator.mediaSession.setActionHandler("stop", pause);
       }
     } catch (error) {
-      console.error(error.message);
+      console.error(error);
     }
   };
 
@@ -86,7 +86,7 @@ export default class AudioSession {
   }
 
   static getMetadata = (song: Blob) =>
-    new Promise<any>(resolve => {
+    new Promise<any>((resolve) => {
       window.jsmediatags.read(song, {
         onSuccess: function (tag: any) {
           resolve(tag);
@@ -107,7 +107,7 @@ export default class AudioSession {
         let TYPED_ARRAY: any = new Uint8Array(data);
         const STRING_CHAR = TYPED_ARRAY.reduce((data: any, byte: any) => {
           return data + String.fromCharCode(byte);
-        }, '');
+        }, "");
         let base64String = btoa(STRING_CHAR);
         let imgurl = `data:${format};base64,${base64String}`;
 
