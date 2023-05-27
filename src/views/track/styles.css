@@ -102,7 +102,7 @@
   height: 85%;
   display: flex;
   overflow: hidden;
-  border-radius: 50%;
+  border-radius: 10%;
   align-items: center;
   justify-content: center;
   background: var(--bg-color-accent);

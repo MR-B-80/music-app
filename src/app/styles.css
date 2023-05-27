@@ -32,7 +32,7 @@
   .app__container {
     width: 700px;
     overflow: hidden;
-    height: calc(100% - 96px);
+    height: calc(100% - 17px);
     border-radius: var(--padding);
     background-color: var(--bg-color);
     box-shadow: 0 0px 0.6px rgba(0, 0, 0, 0.024),

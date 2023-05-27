@@ -1,6 +1,6 @@
-import { useState } from 'react';
-import { FaSearch } from 'react-icons/fa';
-import './styles.css';
+import { useState } from "react";
+import { FaSearch } from "react-icons/fa";
+import "./styles.css";
 
 type InputProps = {
   type?: string;
@@ -10,22 +10,23 @@ type InputProps = {
 
 const Input = ({
   onChange,
-  type = 'text',
-  placeholder = 'Search...',
+  type = "text",
+  placeholder = "Search...",
 }: InputProps) => {
   const [inFocus, setFocus] = useState(false);
   return (
     <div
       className={`input__wrapper ${
-        inFocus ? 'input__wrapper--focus' : ''
+        inFocus ? "input__wrapper--focus" : ""
       }`.trim()}
+      style={{ width: "85%" }}
     >
       <input
         type={type}
         placeholder={placeholder}
         onFocus={() => setFocus(true)}
         onBlur={() => setFocus(false)}
-        onChange={e => onChange && onChange(e.target.value)}
+        onChange={(e) => onChange && onChange(e.target.value)}
       />
       <div className="input__icon">
         <FaSearch size={24} />

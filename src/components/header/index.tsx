@@ -1,5 +1,6 @@
-import './styles.css';
-import { FaCog, FaPlus } from 'react-icons/fa';
+import "./styles.css";
+// import { FaPlus } from "react-icons/fa";
+import { BsThreeDotsVertical } from "react-icons/bs";
 
 type HeaderProps = {
   size?: number;
@@ -12,7 +13,7 @@ type HeaderProps = {
 
 const Header = ({
   size = 24,
-  title = '',
+  title = "",
   leftIcon,
   rightIcon,
   onLeftIconClick,
@@ -26,12 +27,17 @@ const Header = ({
             className="header__icon"
             onClick={() => onLeftIconClick && onLeftIconClick()}
           >
-            {leftIcon || <FaCog size={size} />}
+            <div
+              className="header__icon"
+              onClick={() => onLeftIconClick && onLeftIconClick()}
+            >
+              {leftIcon || <BsThreeDotsVertical size={30} />}
+            </div>
           </div>
         </div>
       )}
       {leftIcon !== null && <div className="header__spacer"></div>}
-      <div className="header__title">{title}</div>
+      {/* <div className="header__title">{title}</div> */}
       <div className="header__spacer"></div>
       {rightIcon !== null && (
         <div className="header__menu__right">
@@ -39,7 +45,7 @@ const Header = ({
             className="header__icon"
             onClick={() => onRightIconClick && onRightIconClick()}
           >
-            {rightIcon || <FaPlus size={size} />}
+            {rightIcon}
           </div>
         </div>
       )}

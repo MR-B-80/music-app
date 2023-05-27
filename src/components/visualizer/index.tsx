@@ -62,9 +62,9 @@ const Visualizer = ({
       ctx.clearRect(0, 0, WIDTH, HEIGHT);
 
       const color = () => {
-        var c = () => Math.random() * 255;
+        // var c = () => Math.random() * 255;
 
-        return `rgb(${c()},${c()},${c()})`;
+        return `rgb(255,0,0)`;
       };
 
       const loop = () => {

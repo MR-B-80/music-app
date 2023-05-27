@@ -1,15 +1,16 @@
-import { FaPlay, FaPause } from 'react-icons/fa';
-import { useDispatch, useSelector } from 'react-redux';
-import { useLayoutEffect, useRef, useState } from 'react';
-import { BsFillSkipBackwardFill, BsFillSkipForwardFill } from 'react-icons/bs';
-import { RiShuffleFill, RiRepeat2Fill, RiRepeatOneFill } from 'react-icons/ri';
+import { FaPlay, FaPause } from "react-icons/fa";
+import { useDispatch, useSelector } from "react-redux";
+import { useLayoutEffect, useRef, useState } from "react";
+import { BsFillSkipBackwardFill, BsFillSkipForwardFill } from "react-icons/bs";
+import { RiShuffleFill, RiRepeat2Fill, RiRepeatOneFill } from "react-icons/ri";
+import Marquee from "react-fast-marquee";
 
-import AudioSession from '../../services/audio-session';
-import { Button, Slider, Visualizer } from '../../components';
-import { SET_REPEAT } from '../../redux';
-import { songTitle } from '../../utils';
-import './styles.css';
-import Vibrate from '../../services/vibrate';
+import AudioSession from "../../services/audio-session";
+import { Button, Slider, Visualizer } from "../../components";
+import { SET_REPEAT } from "../../redux";
+import { songTitle } from "../../utils";
+import "./styles.css";
+import Vibrate from "../../services/vibrate";
 
 type TrackProps = {
   song?: any;
@@ -45,25 +46,25 @@ const Track = ({
 
   const [meta, setMeta] = useState<any>(null);
   const [width, setWidth] = useState<any>({
-    scroll: '100%',
-    client: '100%',
+    scroll: "100%",
+    client: "100%",
   });
 
   const titleRef = useRef<any>(null);
 
   const dispatch = useDispatch();
 
-  const color = settings.light ? 'black' : 'white';
+  const color = settings.light ? "black" : "white";
 
   const { tags = {} } = meta || {};
 
   const title = tags.title ?? songTitle(song);
-  const artist = tags.artist ?? 'Unknown Artist';
+  const artist = tags.artist ?? "Unknown Artist";
   const picture = AudioSession.getPicture(meta);
 
   const handleRepeat = () => {
-    const data: any = { all: 'one', one: 'none', none: 'all' };
-    dispatch(SET_REPEAT(data[settings.repeat] ?? 'all'));
+    const data: any = { all: "one", one: "none", none: "all" };
+    dispatch(SET_REPEAT(data[settings.repeat] ?? "all"));
   };
 
   const handleClick = (callback: Function) => {
@@ -108,13 +109,13 @@ const Track = ({
             ref={titleRef}
             style={
               {
-                '--scroll-width': `${width.scroll}px`,
-                '--client-width': `${width.client}px`,
+                "--scroll-width": `${width.scroll}px`,
+                "--client-width": `${width.client}px`,
               } as React.CSSProperties
             }
-            className={width.scroll > width.client ? 'overflowed' : ''}
+            className={width.scroll > width.client ? "overflowed" : ""}
           >
-            {title}
+            <Marquee style={{ fontSize: "25px" }}>{title}</Marquee>
           </h1>
           <p>{artist}</p>
         </div>
@@ -137,7 +138,7 @@ const Track = ({
               active={playing}
               onClick={() =>
                 handleClick(() =>
-                  playing ? onPause && onPause() : onPlay && onPlay(),
+                  playing ? onPause && onPause() : onPlay && onPlay()
                 )
               }
             >
@@ -154,11 +155,11 @@ const Track = ({
             className="track__controls__btn"
             onClick={() => handleClick(() => handleRepeat())}
           >
-            {settings.repeat === 'one' ? (
+            {settings.repeat === "one" ? (
               <RiRepeatOneFill size={24} color={color} />
             ) : (
               <>
-                {settings.repeat === 'none' && (
+                {settings.repeat === "none" && (
                   <div className="track__controls__cross"></div>
                 )}
                 <RiRepeat2Fill size={24} color={color} />
@@ -173,7 +174,7 @@ const Track = ({
           audio={audio}
           playing={playing}
           width={size.width}
-          className={'track__visualizer'}
+          className={"track__visualizer"}
           onError={() => onError && onError()}
         />
       )}

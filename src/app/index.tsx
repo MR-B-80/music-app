@@ -225,7 +225,7 @@ function App() {
       <div className="app__container">
         {view === "home" ? (
           <Header
-            title="playlist"
+            title=""
             onRightIconClick={() => addSongs()}
             onLeftIconClick={() => setShowMenu(!showMenu)}
           />
@@ -245,6 +245,10 @@ function App() {
 
         {view === "home" && (
           <Home
+            songs={songs}
+            filteredSongs={filteredSongs()}
+            onDelete={(index: number) => deleteSong(index)}
+            addSongs={addSongs}
             showSearch={true}
             onSearch={(e: string) => setSearchText(e)}
             playlist={
