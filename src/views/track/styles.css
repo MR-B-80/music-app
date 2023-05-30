@@ -19,6 +19,7 @@
   align-items: center;
   justify-content: center;
   padding: var(--padding);
+  background: var(--bg-color-accent);
 }
 
 .track__controls__btn {

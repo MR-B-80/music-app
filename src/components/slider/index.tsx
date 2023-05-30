@@ -121,9 +121,9 @@ const Slider = ({
       Math.floor((radius - diff / 2) * -Math.cos((deg * Math.PI) / 180)) +
       radius;
 
-    blocker.style.transform = `rotate(${deg - 270}deg)`;
+    blocker.style.width = `(${deg - 270})`;
 
-    dial.style.transform = `translate(${x - diff}px, ${y - diff}px)`;
+    dial.style.width = `(${x - diff}px, ${y - diff}px)`;
   };
 
   const getPointsFromDeg = (deg: number) =>
@@ -133,6 +133,7 @@ const Slider = ({
     Math.abs(Math.ceil((points / 100) * 180) - 270);
 
   useLayoutEffect(() => {
+    console.log(value);
     updateSlider(getDegFromPoints(value));
   });
 
@@ -154,11 +155,11 @@ const Slider = ({
       </div>
       <div className="slider__info">{children}</div>
       <div className="slider__dial" tabIndex={0} ref={dialRef}></div>
-      <div className="slider__start"></div>
-      <div className="slider__end"></div>
-      <div className="slider__currtime">
+      {/* <div className="slider__start"></div> */}
+      {/* <div className="slider__end"></div> */}
+      {/* <div className="slider__currtime">
         {audio && audio.currentTime ? getTime(audio.currentTime) : ""}
-      </div>
+      </div> */}
       <div className="slider__totaltime">
         {audio && audio.duration ? getTime(audio.duration) : ""}
       </div>

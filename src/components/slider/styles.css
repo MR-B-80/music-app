@@ -1,7 +1,7 @@
 .slider {
   position: relative;
   border-radius: 50%;
-  width: var(--size);
+  width: 85%;
   height: var(--size);
 }
 
@@ -12,8 +12,8 @@
 }
 
 .slider__track {
-  top: 50%;
-  height: 50%;
+  top: 145%;
+  height: 5%;
   width: 100%;
   z-index: 10;
   overflow: hidden;
@@ -33,13 +33,13 @@
     #833ab4
   ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 
-  border-radius: 0 0 var(--size) var(--size);
+  /* border-radius: 0 0 var(--size) var(--size); */
 }
 
 .slider__dial {
   left: 0px;
   z-index: 40;
-  border-radius: 50%;
+  /* border-radius: 50%; */
   cursor: pointer;
   position: absolute;
   will-change: transform;
@@ -69,11 +69,11 @@
   text-align: center;
   text-transform: uppercase;
   background-color: var(--bg-color);
-  font: 400 16px/1.1 'Roboto', sans-serif;
-  top: calc(calc(var(--dial-size) / 2));
-  left: calc(calc(var(--dial-size) / 2));
-  width: calc(var(--size) - calc(calc(var(--dial-size))));
-  height: calc(var(--size) - calc(calc(var(--dial-size))));
+  font: 400 16px/1.1 "Roboto", sans-serif;
+  top: -1%;
+  left: 17%;
+  width: 65%;
+  height: auto;
 }
 
 .slider__blocker {

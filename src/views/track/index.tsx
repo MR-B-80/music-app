@@ -2,7 +2,13 @@ import { FaPlay, FaPause } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
 import { useLayoutEffect, useRef, useState } from "react";
 import { BsFillSkipBackwardFill, BsFillSkipForwardFill } from "react-icons/bs";
-import { RiShuffleFill, RiRepeat2Fill, RiRepeatOneFill } from "react-icons/ri";
+import {
+  RiShuffleFill,
+  RiRepeat2Fill,
+  RiRepeatOneFill,
+  RiHeartLine,
+  RiHeartFill,
+} from "react-icons/ri";
 import Marquee from "react-fast-marquee";
 
 import AudioSession from "../../services/audio-session";
@@ -43,7 +49,7 @@ const Track = ({
   onShuffle,
 }: TrackProps) => {
   const settings = useSelector((state: any) => state.settings);
-
+  const [heart, setHeart] = useState(false);
   const [meta, setMeta] = useState<any>(null);
   const [width, setWidth] = useState<any>({
     scroll: "100%",
@@ -119,7 +125,9 @@ const Track = ({
           </h1>
           <p>{artist}</p>
         </div>
-        <div className="track__controls">
+        <div className="track__controls mx-5 rounded-3 p-2">
+          <div className="track__controls__btn"></div>
+          <div className="track__controls__btn"></div>
           <div
             className="track__controls__btn"
             onClick={() => handleClick(() => onShuffle && onShuffle())}
@@ -164,6 +172,18 @@ const Track = ({
                 )}
                 <RiRepeat2Fill size={24} color={color} />
               </>
+            )}
+          </div>
+          <div
+            className="track__controls__btn"
+            onClick={() => {
+              setHeart(!heart);
+            }}
+          >
+            {heart ? (
+              <RiHeartFill size={30} color="red" />
+            ) : (
+              <RiHeartLine size={30} color="red" />
             )}
           </div>
         </div>
