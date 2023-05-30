@@ -85,7 +85,11 @@ const Playlist = ({
         >
           {grid && (
             <>
-              <div title={name} className="playlist__name">
+              <div
+                title={name}
+                style={{ height: "50px", overflow: "hidden" }}
+                className="playlist__name"
+              >
                 {name}
               </div>
               <div

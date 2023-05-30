@@ -203,11 +203,12 @@ function App() {
     const seconds = Math.floor(audioPlayer().currentTime - minutes * 60);
     setMinutes(minutes);
     setSeconds(seconds);
-    setRange(seconds);
+    setRange(audioPlayer().currentTime);
   };
   // eslint-disable-next-line
   const timeDrag = (time: number) => {
     const range = audioPlayer().duration * (time / 100);
+    console.log(time);
     if (!isNaN(range)) {
       audioPlayer().currentTime = range;
     }
